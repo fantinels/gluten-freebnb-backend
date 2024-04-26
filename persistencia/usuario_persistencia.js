@@ -22,9 +22,9 @@ async function addUsuario(usuario) {
 
 // Read
 async function buscarUsuario() {
-    const client = await connect()
-    // const client = new Client(conexao)
-    // await client.connect()
+    // const client = await connect()
+    const client = new Client(conexao)
+    await client.connect()
 
     try {
         const sql = `SELECT * FROM usuario`
