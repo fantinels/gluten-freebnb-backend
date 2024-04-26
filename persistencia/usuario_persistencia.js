@@ -25,6 +25,14 @@ async function buscarUsuario() {
     const client = await connect()
     // const client = new Client(conexao)
     // await client.connect()
+
+    try {
+        const sql = `SELECT * FROM usuario`
+        const usuarios = await client.query(sql)
+        await client.end()
+        // await client.release
+        return usuarios.rows
+    } catch (error) { throw error }
 }
 
 async function buscarUsuarioNome(nome) {

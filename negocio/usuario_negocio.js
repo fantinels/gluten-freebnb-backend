@@ -21,7 +21,18 @@ async function addUsuario(usuario) {
 
 // Read
 async function buscarUsuario() {
-    
+    try {
+        const usuario = await persistencia.buscarUsuario()
+
+        if (usuario.length == 0) {
+            const erro = new Error()
+            erro.message = "Não há usuários cadastrados."
+            erro.status = 404
+            throw erro
+        }
+
+        return usuario
+    } catch (error) { throw error }
 }
 
 async function buscarUsuarioNome(nome) {

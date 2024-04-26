@@ -23,6 +23,17 @@ async function addUsuario(req, res) {
 // Read
 async function buscarUsuario(req, res) {
     const usuario = req.body
+
+    try {
+        const usuarios = await negocio.buscarUsuario(usuario)
+        res.status(200).json(usuarios)
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json(error)
+        } else {
+            res.status(500).json({message: "Erro interno!"})
+        }
+    }
 }
 
 async function buscarUsuarioNome(req, res) {
