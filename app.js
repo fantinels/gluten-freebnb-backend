@@ -13,7 +13,6 @@ app.use(express.json()); // Configuração para receber dados JSON
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/usuario", rotaUsuario);
-app.use("/api/personal", rotaPersonal);
 
 
 app.listen(port, () => {
