@@ -1,7 +1,7 @@
 const conexao = {
     host: 'localhost',
-    // port: 5432,
-    port: 5433,
+    port: 5432,
+    // port: 5433,
     database: 'gluten_freebnb',
     user: 'postgres',
     password:'12345'
