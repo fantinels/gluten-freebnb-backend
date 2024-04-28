@@ -1,12 +1,12 @@
-const { Client } = require('pg')
-const { conexao } = require('./conexao')
-// const connect = require("../db");
+// const { Client } = require('pg')
+// const { conexao } = require('./conexao')
+const connect = require("../db");
 
 // Create
 async function addUsuario(usuario) {
-    // const client = await connect()
-    const client = new Client(conexao)
-    await client.connect()
+    const client = await connect()
+    // const client = new Client(conexao)
+    // await client.connect()
 
     try {
         const sql = `INSERT INTO usuario(nome, cpf, email, telefone, cidade, uf, dt_nascimento, senha) 
@@ -22,9 +22,9 @@ async function addUsuario(usuario) {
 
 // Read
 async function buscarUsuario() {
-    // const client = await connect()
-    const client = new Client(conexao)
-    await client.connect()
+    const client = await connect()
+    // const client = new Client(conexao)
+    // await client.connect()
 
     try {
         const sql = `SELECT * FROM usuario`
