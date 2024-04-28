@@ -14,8 +14,8 @@ async function addUsuario(usuario) {
         const values = [usuario.nome, usuario.cpf, usuario.email, usuario.telefone, usuario.cidade, usuario.uf, usuario.dt_nascimento, usuario.senha]
         const usuarios = await client.query(sql, values)
 
-        await client.end()
-        // await client.release()
+        // await client.end()
+        await client.release
         return usuarios.rows[0]
     } catch (error) { throw error }
 }
@@ -29,8 +29,8 @@ async function buscarUsuario() {
     try {
         const sql = `SELECT * FROM usuario`
         const usuarios = await client.query(sql)
-        await client.end()
-        // await client.release
+        // await client.end()
+        await client.release
         return usuarios.rows
     } catch (error) { throw error }
 }

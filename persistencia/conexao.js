@@ -4,7 +4,7 @@ const conexao = {
     // port: 5433,
     database: 'gluten_freebnb',
     user: 'postgres',
-    password:'12345'
+    password:'post22'
 }
 
 module.exports = {conexao}
