@@ -4,6 +4,12 @@ const persistencia = require('../persistencia/usuario_persistencia');
 
 // Create
 async function addUsuario(usuario) {
+    const email = await persistencia.buscarUsuarioEmail(usuario.email)
+
+    if(email) {
+        throw({status: 400, message: "E-mail já cadastrado"})
+    }
+
     if(usuario && usuario.nome && usuario.cpf && usuario.email && usuario.telefone && usuario.cidade && usuario.uf &&
        usuario.dt_nascimento && usuario.senha) {
         try {
@@ -36,25 +42,88 @@ async function buscarUsuario() {
 }
 
 async function buscarUsuarioNome(nome) {
+    try {
+        const usuario = await persistencia.buscarUsuarioNome(nome)
+
+        if (!usuario) {
+            const erro = new Error()
+            erro.message = "Não há usuários cadastrados."
+            erro.status = 404
+            throw erro
+        }
+
+        return usuario
+    } catch (error) { throw error }
     
 }
 
 async function buscarUsuarioId(id) {
-    
+    try {
+        const usuario = await persistencia.buscarUsuarioId(id)
+
+        if (!usuario) {
+            const erro = new Error()
+            erro.message = "Não há usuários cadastrados."
+            erro.status = 404
+            throw erro
+        }
+
+        return usuario
+    } catch (error) { throw error }    
 }
 
-async function buscarUsuarioEmail(id) {
+async function buscarUsuarioEmail(email) {
+    try {
+        const usuario = await persistencia.buscarUsuarioEmail(email)
+
+        if (!usuario) {
+            const erro = new Error()
+            erro.message = "Não há usuários cadastrados."
+            erro.status = 404
+            throw erro
+        }
+
+        return usuario
+    } catch (error) { throw error }
     
 }
 
 // Update
-async function atualizarUsuario(id, alunos) {
-    
+async function atualizarUsuario(id, usuarios) {
+    if(usuarios && usuarios.nome && usuarios.cpf && usuarios.email && usuarios.telefone && usuarios.cidade && usuarios.uf 
+        && usuarios.dt_nascimento && usuarios.senha) {
+            const atualizarUsuario = await persistencia.atualizarUsuario(id, usuarios)
+
+            if(!atualizarUsuario) {
+                let erro = new Error()
+                erro.message = "Usuário não encontrado."
+                erro.status = 404
+                throw erro
+            }
+
+            return atualizarUsuario
+        } else {
+            let erro = new Error()
+            erro.message = "Todos os campos são obrigatórios."
+            erro.status = 400
+            throw erro
+        }
 }
 
 // Delete
 async function deletarUsuario(id) {
-    
+    try {
+        const deletarUsuario =  await persistencia.deletarUsuario(id)
+
+        if (!deletarUsuario) {
+            const erro = new Error()
+            erro.message = "Usuário não encontrado"
+            erro.status = 404
+            throw erro
+        }
+
+        return clienteDeletado
+    } catch (error) { throw error }    
 }
 
 
