@@ -80,8 +80,8 @@ async function atualizarUsuario(id, usuario) {
                                         uf            = $6,
                                         dt_nascimento = $7,
                                         senha         = $8
-                      WHERE id = $1 RETURNING *`
-        const values = [usuario.nome, usuario.cpf, usuario.email, usuario.telefone, usuario.cidade, usuario.uf, usuario.dt_nascimento, usuario.senha]
+                      WHERE id = $9 RETURNING *`
+        const values = [usuario.nome, usuario.cpf, usuario.email, usuario.telefone, usuario.cidade, usuario.uf, usuario.dt_nascimento, usuario.senha,id]
         const usuarios = await client.query(sql, values)
 
         client.release
@@ -94,7 +94,7 @@ async function deletarUsuario(id) {
     const client = await connect()
 
     try {
-        const sql = `DELETE FROM usuario WHERE id = $1`
+        const sql = `DELETE FROM usuario WHERE id = $1 RETURNING *`
         const values = [id]
         const usuarios = await client.query(sql, values)
 

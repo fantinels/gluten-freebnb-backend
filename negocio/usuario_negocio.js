@@ -14,7 +14,6 @@ async function addUsuario(usuario) {
        usuario.dt_nascimento && usuario.senha) {
         try {
             const usuarios = await persistencia.addUsuario(usuario)
-            console.log(usuarios)
             return usuarios
         } catch (error) { throw error }
     } else {
@@ -47,7 +46,7 @@ async function buscarUsuarioNome(nome) {
 
         if (!usuario) {
             const erro = new Error()
-            erro.message = "Não há usuários cadastrados."
+            erro.message = "Usuário não encontrado."
             erro.status = 404
             throw erro
         }
@@ -63,7 +62,7 @@ async function buscarUsuarioId(id) {
 
         if (!usuario) {
             const erro = new Error()
-            erro.message = "Não há usuários cadastrados."
+            erro.message = "Usuário não encontrado."
             erro.status = 404
             throw erro
         }
@@ -78,7 +77,7 @@ async function buscarUsuarioEmail(email) {
 
         if (!usuario) {
             const erro = new Error()
-            erro.message = "Não há usuários cadastrados."
+            erro.message = "Usuário não encontrado."
             erro.status = 404
             throw erro
         }
@@ -117,7 +116,7 @@ async function deletarUsuario(id) {
 
         if (!deletarUsuario) {
             const erro = new Error()
-            erro.message = "Usuário não encontrado"
+            erro.message = "Usuário não encontrado."
             erro.status = 404
             throw erro
         }
