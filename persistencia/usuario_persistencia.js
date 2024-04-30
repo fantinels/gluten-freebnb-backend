@@ -43,7 +43,7 @@ async function buscarUsuarioNome(nome) {
 
 async function buscarUsuarioId(id) {
     const client = await connect()
-
+    
     try {
         const sql = `SELECT * FROM usuario WHERE id = $1`
         const values = [id]

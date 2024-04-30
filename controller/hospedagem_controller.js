@@ -4,10 +4,11 @@ const negocio = require('../negocio/hospedagem_negocio')
 
 // Create
 async function addHospedagem(req, res) {
+    const id_usuario = req.body.id_usuario
     const hospedagem = req.body  
 
     try {
-        const hospedagens = await negocio.addHospedagem(hospedagem)
+        const hospedagens = await negocio.addHospedagem(id_usuario, hospedagem)
         res.status(201).json(hospedagens)
     } catch (error) {
         if (error.status) {
@@ -25,7 +26,7 @@ async function buscarHospedagens(req, res) {
     const hospedagem = req.body
 
     try {
-        const hospedagens = await negocio.buscarUsuario(hospedagem)
+        const hospedagens = await negocio.buscarHospedagens(hospedagem)
         res.status(200).json(hospedagens)
     } catch (error) {
         if (error.status) {
@@ -41,7 +42,7 @@ async function buscarHospedagemUsuario(req, res) {
     const id_usuario = req.params.id_usuario
 
     try {
-        const hospedagens = await negocio.buscarUsuarioNome(id_usuario)
+        const hospedagens = await negocio.buscarHospedagemUsuario(id_usuario)
         res.status(200).json(hospedagens)
     } catch (error) {
         if (error.status) {

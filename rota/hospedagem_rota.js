@@ -4,7 +4,7 @@ const controller = require('../controller/hospedagem_controller')
 const router = express.Router()
 
 
-router.post('/', controller.addHospedagem)
+// router.post('/:id', controller.addHospedagem)
 router.get('/', controller.buscarHospedagens)
 router.get('/:id_usuario', controller.buscarHospedagemUsuario)
 router.get('/:id', controller.buscarHospedagemId)
