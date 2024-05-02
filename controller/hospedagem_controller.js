@@ -1,14 +1,15 @@
-const negocio = require('../negocio/usuario_negocio')
+const negocio = require('../negocio/hospedagem_negocio')
 
 // Iniciando CRUD
 
 // Create
-async function addUsuario(req, res) {
-    const usuario = req.body  
+async function addHospedagem(req, res) {
+    const id_usuario = req.body.id_usuario
+    const hospedagem = req.body  
 
     try {
-        const usuarios = await negocio.addUsuario(usuario)
-        res.status(201).json(usuarios)
+        const hospedagens = await negocio.addHospedagem(id_usuario, hospedagem)
+        res.status(201).json(hospedagens)
     } catch (error) {
         if (error.status) {
             res.status(error.status).json(error)
@@ -21,12 +22,12 @@ async function addUsuario(req, res) {
 }
 
 // Read
-async function buscarUsuario(req, res) {
-    const usuario = req.body
+async function buscarHospedagens(req, res) {
+    const hospedagem = req.body
 
     try {
-        const usuarios = await negocio.buscarUsuario(usuario)
-        res.status(200).json(usuarios)
+        const hospedagens = await negocio.buscarHospedagens(hospedagem)
+        res.status(200).json(hospedagens)
     } catch (error) {
         if (error.status) {
             res.status(error.status).json(error)
@@ -37,12 +38,12 @@ async function buscarUsuario(req, res) {
     }
 }
 
-async function buscarUsuarioNome(req, res) {
-    const nome = req.params.nome
+async function buscarHospedagemUsuario(req, res) {
+    const id_usuario = req.params.id_usuario
 
     try {
-        const usuarios = await negocio.buscarUsuarioNome(nome)
-        res.status(200).json(usuarios)
+        const hospedagens = await negocio.buscarHospedagemUsuario(id_usuario)
+        res.status(200).json(hospedagens)
     } catch (error) {
         if (error.status) {
             res.status(error.status).json(error)
@@ -53,27 +54,12 @@ async function buscarUsuarioNome(req, res) {
     }
 }
 
-async function buscarUsuarioId(req, res) {
+async function buscarHospedagemId(req, res) {
     const id = req.params.id
 
     try {
-        const usuarios = await negocio.buscarUsuarioId(id)
-        res.status(200).json(usuarios)
-    } catch (error) {
-        if (error.status) {
-            res.status(error.status).json(error)
-        } else {
-            res.status(500).json({message: "Erro interno!"})
-            console.log(error)
-        }
-    }
-}
-
-async function buscarUsuarioEmail(req, res) {
-    const email = req.params.email
-    try {
-        const usuarios = await negocio.buscarUsuarioEmail(email)
-        res.status(200).json(usuarios)
+        const hospedagens = await negocio.buscarHospedagemId(id)
+        res.status(200).json(hospedagens)
     } catch (error) {
         if (error.status) {
             res.status(error.status).json(error)
@@ -85,13 +71,13 @@ async function buscarUsuarioEmail(req, res) {
 }
 
 // Update
-async function atualizarUsuario(req, res) {
+async function atualizarHospedagem(req, res) {
     const id = req.params.id
-    const usuario = req.body
+    const hospedagem = req.body
 
     try {
-        const usuarios = await negocio.atualizarUsuario(id, usuario)
-        res.status(200).json(usuarios)
+        const hospedagens = await negocio.atualizarHospedagem(id, hospedagem)
+        res.status(200).json(hospedagens)
     } catch (error) {
         if (error.status) {
             res.status(error.status).json(error)
@@ -103,12 +89,12 @@ async function atualizarUsuario(req, res) {
 }
 
 // Delete
-async function deletarUsuario(req, res) {
+async function deletarHospedagem(req, res) {
     const id = req.params.id
 
     try {
-        const usuarios = await negocio.deletarUsuario(id)
-        res.status(200).json(usuarios)
+        const hospedagens = await negocio.deletarHospedagem(id)
+        res.status(200).json(hospedagens)
     } catch (error) {
         if (error.status) {
             res.status(error.status).json(error)
@@ -120,11 +106,10 @@ async function deletarUsuario(req, res) {
 }
 
 module.exports = {
-    addUsuario,
-    buscarUsuario,
-    buscarUsuarioNome,
-    buscarUsuarioId,
-    buscarUsuarioEmail,
-    atualizarUsuario,
-    deletarUsuario
+    addHospedagem,
+    buscarHospedagens,
+    buscarHospedagemUsuario,
+    buscarHospedagemId,
+    atualizarHospedagem,
+    deletarHospedagem
 }
