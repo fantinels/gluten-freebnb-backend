@@ -11,4 +11,5 @@ router.get('/:id', controller.buscarHospedagemId)
 router.put('/:id', controller.atualizarHospedagem)
 router.delete('/:id', controller.deletarHospedagem)
 
+
 module.exports = router
