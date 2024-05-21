@@ -1,3 +1,6 @@
+const { Client }  = require('pg')
+const { conexao } = require('./conexao');
+
 const connect = require("../db");
 
 // Create
@@ -33,6 +36,9 @@ async function buscarHospedagens() {
 
 async function buscarHospedagemUsuario(idUsuario) {
     const client = await connect()
+
+    // const client = new Client(conexao)
+    // client.connect()
 
     try {
         const sql = `SELECT usuario.nome, hospedagem.* FROM hospedagem
