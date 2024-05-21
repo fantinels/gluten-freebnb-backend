@@ -48,7 +48,7 @@ async function buscarHospedagemUsuario(idUsuario) {
         const hospedagens = await client.query(sql, values)
 
         client.release
-        return hospedagens.rows
+        return hospedagens.rows[0]
     } catch (error) { throw error }
 }
 
@@ -85,9 +85,9 @@ async function atualizarHospedagem(id, hospedagem) {
                                            valor           = $13,
                                            qt_hospede      = $14,
                                            qt_banheiro     = $15,
-                                           qt_quarto       = $15,
-                                           qt_cama         = $16
-                      WHERE id = $17 RETURNING *`
+                                           qt_quarto       = $16,
+                                           qt_cama         = $17
+                      WHERE id = $18 RETURNING *`
         const values = [hospedagem.nome, hospedagem.cep, hospedagem.tipo_logradouro, hospedagem.logradouro, hospedagem.numero, 
             hospedagem.complemento, hospedagem.bairro, hospedagem.cidade, hospedagem.uf, hospedagem.descricao, hospedagem.foto,
             hospedagem.tipo_acomodacao, hospedagem.valor, hospedagem.qt_hospede, hospedagem.qt_banheiro, hospedagem.qt_quarto,
