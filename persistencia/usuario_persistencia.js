@@ -1,4 +1,6 @@
 const connect = require("../db");
+const { Client }  = require('pg')
+const { conexao } = require('./conexao');
 
 // Create
 async function addUsuario(usuario) {

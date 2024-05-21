@@ -105,11 +105,24 @@ async function deletarHospedagem(req, res) {
     }
 }
 
+async function hospedagemImagem (req, res) {
+    // return res.status(400).json({
+    //     erro: true,
+    //     message: "Erro: Upload não realizado."
+    // })
+
+    return res.json({
+        erro: false,
+        mensagem: "Upload realizado com sucesso!"
+    })
+}
+
 module.exports = {
     addHospedagem,
     buscarHospedagens,
     buscarHospedagemUsuario,
     buscarHospedagemId,
     atualizarHospedagem,
-    deletarHospedagem
+    deletarHospedagem,
+    hospedagemImagem
 }
