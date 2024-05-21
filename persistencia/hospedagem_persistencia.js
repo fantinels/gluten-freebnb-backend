@@ -4,18 +4,18 @@ const connect = require("../db");
 async function addHospedagem(id_usuario, hospedagem) {
     const client = await connect()
 
-    // try {
-    //     const sql = `INSERT INTO hospedagem(id_usuario, nome, cep, tipo_logradouro, logradouro, numero, complemento, bairro, cidade, uf, descricao,
-    //                                         foto, tipo_acomodacao, valor, qt_hospede, qt_banheiro, qt_quarto, qt_cama) 
-    //                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING *`
-    //     const values = [id_usuario, hospedagem.nome, hospedagem.cep, hospedagem.tipo_logradouro, hospedagem.logradouro, hospedagem.numero, 
-    //         hospedagem.complemento, hospedagem.bairro, hospedagem.cidade, hospedagem.uf, hospedagem.descricao, hospedagem.foto, 
-    //         hospedagem.tipo_acomodacao, hospedagem.valor, hospedagem.qt_hospede, hospedagem.qt_banheiro, hospedagem.qt_quarto, hospedagem.qt_cama]
-    //     const hospedagens = await client.query(sql, values)
+    try {
+        const sql = `INSERT INTO hospedagem(id_usuario, nome, cep, tipo_logradouro, logradouro, numero, complemento, bairro, cidade, uf, descricao,
+                                            foto, tipo_acomodacao, valor, qt_hospede, qt_banheiro, qt_quarto, qt_cama) 
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING *`
+        const values = [id_usuario, hospedagem.nome, hospedagem.cep, hospedagem.tipo_logradouro, hospedagem.logradouro, hospedagem.numero, 
+            hospedagem.complemento, hospedagem.bairro, hospedagem.cidade, hospedagem.uf, hospedagem.descricao, hospedagem.foto, 
+            hospedagem.tipo_acomodacao, hospedagem.valor, hospedagem.qt_hospede, hospedagem.qt_banheiro, hospedagem.qt_quarto, hospedagem.qt_cama]
+        const hospedagens = await client.query(sql, values)
 
-    //     client.release
-    //     return hospedagens.rows[0]
-    // } catch (error) { throw error }
+        client.release
+        return hospedagens.rows[0]
+    } catch (error) { throw error }
 }
 
 // Read
@@ -42,7 +42,7 @@ async function buscarHospedagemUsuario(idUsuario) {
         const hospedagens = await client.query(sql, values)
 
         client.release
-        return hospedagens.rows
+        return hospedagens.rows[0]
     } catch (error) { throw error }
 }
 
@@ -79,9 +79,9 @@ async function atualizarHospedagem(id, hospedagem) {
                                            valor           = $13,
                                            qt_hospede      = $14,
                                            qt_banheiro     = $15,
-                                           qt_quarto       = $15,
-                                           qt_cama         = $16
-                      WHERE id = $17 RETURNING *`
+                                           qt_quarto       = $16,
+                                           qt_cama         = $17
+                      WHERE id = $18 RETURNING *`
         const values = [hospedagem.nome, hospedagem.cep, hospedagem.tipo_logradouro, hospedagem.logradouro, hospedagem.numero, 
             hospedagem.complemento, hospedagem.bairro, hospedagem.cidade, hospedagem.uf, hospedagem.descricao, hospedagem.foto,
             hospedagem.tipo_acomodacao, hospedagem.valor, hospedagem.qt_hospede, hospedagem.qt_banheiro, hospedagem.qt_quarto,

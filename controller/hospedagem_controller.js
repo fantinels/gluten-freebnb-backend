@@ -4,19 +4,22 @@ const negocio = require('../negocio/hospedagem_negocio')
 
 // Create
 async function addHospedagem(req, res) {
-    const id_usuario = req.body.id_usuario
-    const hospedagem = req.body  
+    const id_usuario = req.params.id;
+    const hospedagem = req.body;
+    if (req.file) {
+        hospedagem.foto = req.file.filename; // Salve o nome do arquivo no campo 'foto'
+    }
 
     try {
-        const hospedagens = await negocio.addHospedagem(id_usuario, hospedagem)
-        res.status(201).json(hospedagens)
+        const hospedagens = await negocio.addHospedagem(id_usuario, hospedagem);
+        res.status(201).json(hospedagens);
     } catch (error) {
         if (error.status) {
-            res.status(error.status).json(error)
-            console.log(error)
+            res.status(error.status).json(error);
+            console.log(error);
         } else {
-            res.status(500).json({message: "Erro interno!"})
-            console.log(error)
+            res.status(500).json({ message: "Erro interno!" });
+            console.log(error);
         }
     }
 }
@@ -39,7 +42,7 @@ async function buscarHospedagens(req, res) {
 }
 
 async function buscarHospedagemUsuario(req, res) {
-    const id_usuario = req.params.id_usuario
+    const id_usuario = req.params.id
 
     try {
         const hospedagens = await negocio.buscarHospedagemUsuario(id_usuario)

@@ -121,7 +121,7 @@ async function deletarUsuario(id) {
             throw erro
         }
 
-        return clienteDeletado
+        return deletarUsuario
     } catch (error) { throw error }    
 }
 
