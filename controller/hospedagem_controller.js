@@ -4,7 +4,7 @@ const negocio = require('../negocio/hospedagem_negocio')
 
 // Create
 async function addHospedagem(req, res) {
-    const id_usuario = req.body.id_usuario
+    const id_usuario = req.params.id
     const hospedagem = req.body  
 
     try {
@@ -39,7 +39,7 @@ async function buscarHospedagens(req, res) {
 }
 
 async function buscarHospedagemUsuario(req, res) {
-    const id_usuario = req.params.id_usuario
+    const id_usuario = req.params.id
 
     try {
         const hospedagens = await negocio.buscarHospedagemUsuario(id_usuario)

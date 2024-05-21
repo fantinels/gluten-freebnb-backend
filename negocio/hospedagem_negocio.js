@@ -5,27 +5,26 @@ const { buscarUsuarioId } = require('../persistencia/usuario_persistencia');
 
 // Create
 async function addHospedagem(id_usuario, hospedagem) {
-    // const id = await buscarUsuarioId(id_usuario)
+    const id = await buscarUsuarioId(id_usuario)
 
-    // if (!id) {
-    //     console.log(id)
-    //     throw ({status: 404, message: "Não existe este usuário"})
-    // }
+    if (!id) {
+        throw ({status: 404, message: "Não existe este usuário"})
+    }
 
-    // if(id_usuario, hospedagem && hospedagem.nome && hospedagem.cep && hospedagem.tipo_logradouro && hospedagem.logradouro &&
-    //     hospedagem.numero && hospedagem.complemento && hospedagem.bairro && hospedagem.cidade && hospedagem.uf && hospedagem.descricao &&
-    //     hospedagem.foto && hospedagem.tipo_acomodacao && valor && hospedagem.qt_hospede && hospedagem.qt_banheiro && hospedagem.qt_quarto &&
-    //     hospedagem.qt_cama) {
-    //     try {
-    //         const hospedagens = await persistencia.addHospedagem(id_usuario, hospedagem)
-    //         return hospedagens
-    //     } catch (error) { throw error }
-    // } else {
-    //     const erro = new Error()
-    //     erro.message = "Todos os campos são obrigatórios."
-    //     erro.status = 400
-    //     throw erro
-    // }
+    if(id_usuario, hospedagem && hospedagem.nome && hospedagem.cep && hospedagem.tipo_logradouro && hospedagem.logradouro &&
+        hospedagem.numero && hospedagem.complemento && hospedagem.bairro && hospedagem.cidade && hospedagem.uf && hospedagem.descricao &&
+        hospedagem.foto && hospedagem.tipo_acomodacao && hospedagem.valor && hospedagem.qt_hospede && hospedagem.qt_banheiro && hospedagem.qt_quarto &&
+        hospedagem.qt_cama) {
+        try {
+            const hospedagens = await persistencia.addHospedagem(id_usuario, hospedagem)
+            return hospedagens
+        } catch (error) { throw error }
+    } else {
+        const erro = new Error()
+        erro.message = "Todos os campos são obrigatórios."
+        erro.status = 400
+        throw erro
+    }
 }
 
 // Read
@@ -79,7 +78,7 @@ async function buscarHospedagemId(id) {
 async function atualizarHospedagem(id, hospedagem) {
     if(hospedagem && hospedagem.nome && hospedagem.cep && hospedagem.tipo_logradouro && hospedagem.logradouro &&
         hospedagem.numero && hospedagem.complemento && hospedagem.bairro && hospedagem.cidade && hospedagem.uf && hospedagem.descricao &&
-        hospedagem.foto && hospedagem.tipo_acomodacao && valor && hospedagem.qt_hospede && hospedagem.qt_banheiro && hospedagem.qt_quarto &&
+        hospedagem.foto && hospedagem.tipo_acomodacao && hospedagem.valor && hospedagem.qt_hospede && hospedagem.qt_banheiro && hospedagem.qt_quarto &&
         hospedagem.qt_cama) {
             const atualizarHospedagem = await persistencia.atualizarHospedagem(id, hospedagem)
 
