@@ -23,7 +23,7 @@ async function buscarHospedagens() {
     const client = await connect()
 
     try {
-        const sql = `SELECT * FROM hospedagem`
+        const sql = `SELECT * FROM hospedagem ORDER BY id`
         const hospedagens = await client.query(sql)
 
         client.release
