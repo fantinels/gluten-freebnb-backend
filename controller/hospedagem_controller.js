@@ -7,7 +7,7 @@ async function addHospedagem(req, res) {
     const id_usuario = req.params.id;
     const hospedagem = req.body;
     if (req.file) {
-        hospedagem.foto = req.file.filename; // Salve o nome do arquivo no campo 'foto'
+        hospedagem.foto = req.file.path; // Salve o nome do arquivo no campo 'foto'
     }
 
     try {
