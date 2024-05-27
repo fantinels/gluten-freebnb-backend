@@ -12,7 +12,8 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: 'uploads', // Nome da pasta no Cloudinary onde as imagens serão armazenadas
-        allowed_formats: ['jpg', 'png'],
+        format: async (req, file) => 'jpg',
+        public_id: (req, file) => Date.now().toString() + '-' + file.originalname.split('.')[0],
     },
 });
 
