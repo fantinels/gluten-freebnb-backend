@@ -61,7 +61,7 @@ async function buscarHospedagemId(id) {
 
 // Update
 async function atualizarHospedagem(id, hospedagem) {
-    const client = await connect()
+    const client = await connect();
 
     try {
         const sql = `UPDATE hospedagem SET nome            = $1,
@@ -81,16 +81,18 @@ async function atualizarHospedagem(id, hospedagem) {
                                            qt_banheiro     = $15,
                                            qt_quarto       = $16,
                                            qt_cama         = $17
-                      WHERE id = $18 RETURNING *`
+                      WHERE id = $18 RETURNING *`;
         const values = [hospedagem.nome, hospedagem.cep, hospedagem.tipo_logradouro, hospedagem.logradouro, hospedagem.numero, 
             hospedagem.complemento, hospedagem.bairro, hospedagem.cidade, hospedagem.uf, hospedagem.descricao, hospedagem.foto,
             hospedagem.tipo_acomodacao, hospedagem.valor, hospedagem.qt_hospede, hospedagem.qt_banheiro, hospedagem.qt_quarto,
-            hospedagem.qt_cama, id]
-        const hospedagens = await client.query(sql, values)
+            hospedagem.qt_cama, id];
+        const hospedagens = await client.query(sql, values);
 
-        client.release
-        return hospedagens.rows[0]
-    } catch (error) { throw error }
+        client.release();
+        return hospedagens.rows[0];
+    } catch (error) {
+        throw error;
+    }
 }
 
 // Delete

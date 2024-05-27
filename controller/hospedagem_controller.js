@@ -6,8 +6,8 @@ const negocio = require('../negocio/hospedagem_negocio')
 async function addHospedagem(req, res) {
     const id_usuario = req.params.id;
     const hospedagem = req.body;
-    if (req.file) {
-        hospedagem.foto = req.file.path; // Salve o nome do arquivo no campo 'foto'
+    if (req.files) {
+        hospedagem.foto = req.files.map(file => file.path); // Salve o nome do arquivo no campo 'foto'
     }
 
     try {
@@ -77,6 +77,9 @@ async function buscarHospedagemId(req, res) {
 async function atualizarHospedagem(req, res) {
     const id = req.params.id
     const hospedagem = req.body
+    if (req.file) {
+        hospedagem.foto = req.file.path
+    }
 
     try {
         const hospedagens = await negocio.atualizarHospedagem(id, hospedagem)

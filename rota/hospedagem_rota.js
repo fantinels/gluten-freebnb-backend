@@ -6,7 +6,7 @@ const upload = require('../cloudinaryConfig');
 const router = express.Router()
 
 
-router.post('/:id', upload.single('foto'), controller.addHospedagem)
+router.post('/:id', upload.array('foto', 10), controller.addHospedagem)
 router.get('/', controller.buscarHospedagens)
 router.get('/user/:id', controller.buscarHospedagemUsuario)
 router.get('/:id', controller.buscarHospedagemId)
