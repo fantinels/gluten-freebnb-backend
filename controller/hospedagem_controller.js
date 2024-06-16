@@ -16,10 +16,8 @@ async function addHospedagem(req, res) {
     } catch (error) {
         if (error.status) {
             res.status(error.status).json(error);
-            console.log(error);
         } else {
             res.status(500).json({ message: "Erro interno!" });
-            console.log(error);
         }
     }
 }
@@ -77,8 +75,8 @@ async function buscarHospedagemId(req, res) {
 async function atualizarHospedagem(req, res) {
     const id = req.params.id
     const hospedagem = req.body
-    if (req.file) {
-        hospedagem.foto = req.file.path
+    if (req.files) {
+        hospedagem.foto = req.files.map(file => file.path); // Salve o nome do arquivo no campo 'foto'
     }
 
     try {

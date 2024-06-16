@@ -6,11 +6,12 @@ async function addHospedagem(id_usuario, hospedagem) {
 
     try {
         const sql = `INSERT INTO hospedagem(id_usuario, nome, cep, tipo_logradouro, logradouro, numero, complemento, bairro, cidade, uf, descricao,
-                                            foto, tipo_acomodacao, valor, qt_hospede, qt_banheiro, qt_quarto, qt_cama) 
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING *`
+                                            foto, tipo_acomodacao, valor, qt_hospede, qt_banheiro, qt_quarto, qt_cama, especificacao) 
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19) RETURNING *`
         const values = [id_usuario, hospedagem.nome, hospedagem.cep, hospedagem.tipo_logradouro, hospedagem.logradouro, hospedagem.numero, 
-            hospedagem.complemento, hospedagem.bairro, hospedagem.cidade, hospedagem.uf, hospedagem.descricao, hospedagem.foto, 
-            hospedagem.tipo_acomodacao, hospedagem.valor, hospedagem.qt_hospede, hospedagem.qt_banheiro, hospedagem.qt_quarto, hospedagem.qt_cama]
+            hospedagem.complemento, hospedagem.bairro, hospedagem.cidade, hospedagem.uf, hospedagem.descricao, hospedagem.foto,
+            hospedagem.tipo_acomodacao, hospedagem.valor, hospedagem.qt_hospede, hospedagem.qt_banheiro, hospedagem.qt_quarto,
+            hospedagem.qt_cama, hospedagem.especificacao]
         const hospedagens = await client.query(sql, values)
 
         client.release
@@ -80,12 +81,13 @@ async function atualizarHospedagem(id, hospedagem) {
                                            qt_hospede      = $14,
                                            qt_banheiro     = $15,
                                            qt_quarto       = $16,
-                                           qt_cama         = $17
-                      WHERE id = $18 RETURNING *`;
+                                           qt_cama         = $17,
+                                           especificacao   = $18
+                      WHERE id = $19 RETURNING *`;
         const values = [hospedagem.nome, hospedagem.cep, hospedagem.tipo_logradouro, hospedagem.logradouro, hospedagem.numero, 
             hospedagem.complemento, hospedagem.bairro, hospedagem.cidade, hospedagem.uf, hospedagem.descricao, hospedagem.foto,
             hospedagem.tipo_acomodacao, hospedagem.valor, hospedagem.qt_hospede, hospedagem.qt_banheiro, hospedagem.qt_quarto,
-            hospedagem.qt_cama, id];
+            hospedagem.qt_cama, hospedagem.especificacao, id];
         const hospedagens = await client.query(sql, values);
 
         client.release();
