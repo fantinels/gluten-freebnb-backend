@@ -10,7 +10,7 @@ router.post('/:id', upload.array('foto', 10), controller.addHospedagem)
 router.get('/', controller.buscarHospedagens)
 router.get('/user/:id', controller.buscarHospedagemUsuario)
 router.get('/:id', controller.buscarHospedagemId)
-router.put('/:id', controller.atualizarHospedagem)
+router.put('/:id', upload.array('foto', 10), controller.atualizarHospedagem)
 router.delete('/:id', controller.deletarHospedagem)
 
 module.exports = router

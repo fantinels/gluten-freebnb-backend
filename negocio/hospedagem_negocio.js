@@ -14,12 +14,13 @@ async function addHospedagem(id_usuario, hospedagem) {
     if(id_usuario, hospedagem && hospedagem.nome && hospedagem.cep && hospedagem.tipo_logradouro && hospedagem.logradouro &&
         hospedagem.numero && hospedagem.complemento && hospedagem.bairro && hospedagem.cidade && hospedagem.uf && hospedagem.descricao &&
         hospedagem.foto && hospedagem.tipo_acomodacao && hospedagem.valor && hospedagem.qt_hospede && hospedagem.qt_banheiro && hospedagem.qt_quarto &&
-        hospedagem.qt_cama) {
+        hospedagem.qt_cama && hospedagem.especificacao) {
         try {
             const hospedagens = await persistencia.addHospedagem(id_usuario, hospedagem)
             return hospedagens
         } catch (error) { throw error }
     } else {
+        console.log(hospedagem)
         const erro = new Error()
         erro.message = "Todos os campos são obrigatórios."
         erro.status = 400
@@ -79,8 +80,10 @@ async function atualizarHospedagem(id, hospedagem) {
     if (hospedagem && hospedagem.nome && hospedagem.cep && hospedagem.tipo_logradouro && hospedagem.logradouro &&
         hospedagem.numero && hospedagem.complemento && hospedagem.bairro && hospedagem.cidade && hospedagem.uf && hospedagem.descricao &&
         hospedagem.foto && hospedagem.tipo_acomodacao && hospedagem.valor && hospedagem.qt_hospede && hospedagem.qt_banheiro && hospedagem.qt_quarto &&
-        hospedagem.qt_cama) {
+        hospedagem.qt_cama && hospedagem.especificacao) {
             const atualizarHospedagem = await persistencia.atualizarHospedagem(id, hospedagem);
+
+            console.log(hospedagem)
 
             if (!atualizarHospedagem) {
                 let erro = new Error();
