@@ -43,7 +43,7 @@ async function buscarHospedagemUsuario(idUsuario) {
         const hospedagens = await client.query(sql, values)
 
         client.release
-        return hospedagens.rows[0]
+        return hospedagens.rows
     } catch (error) { throw error }
 }
 
