@@ -10,7 +10,7 @@ async function addUsuario(usuario) {
         throw({status: 400, message: "E-mail já cadastrado"})
     }
 
-    if(usuario && usuario.nome && usuario.cpf && usuario.email && usuario.senha && usuario.tipo) {
+    if(usuario && usuario.nome && usuario.sobrenome && usuario.cpf && usuario.email && usuario.senha && usuario.tipo) {
         try {
             const usuarios = await persistencia.addUsuario(usuario)
             return usuarios
@@ -88,7 +88,7 @@ async function buscarUsuarioEmail(email) {
 
 // Update
 async function atualizarUsuario(id, usuarios) {
-    if(usuarios && usuarios.nome && usuarios.cpf && usuarios.email && usuarios.senha && usuarios.tipo) {
+    if(usuarios && usuarios.nome && usuarios.sobrenome && usuarios.cpf && usuarios.email && usuarios.senha && usuarios.tipo) {
             const atualizarUsuario = await persistencia.atualizarUsuario(id, usuarios)
 
             if(!atualizarUsuario) {

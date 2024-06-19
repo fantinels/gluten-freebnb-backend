@@ -5,9 +5,9 @@ async function addUsuario(usuario) {
     const client = await connect()
 
     try {
-        const sql = `INSERT INTO usuario(nome, cpf, email, senha, tipo) 
-                     VALUES ($1, $2, $3, $4, $5) RETURNING *`
-        const values = [usuario.nome, usuario.cpf, usuario.email, usuario.senha, usuario.tipo]
+        const sql = `INSERT INTO usuario(nome, sobrenome, cpf, email, senha, tipo) 
+                     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`
+        const values = [usuario.nome, usuario.sobrenome, usuario.cpf, usuario.email, usuario.senha, usuario.tipo]
         const usuarios = await client.query(sql, values)
 
         client.release
@@ -73,12 +73,13 @@ async function atualizarUsuario(id, usuario) {
 
     try {
         const sql = `UPDATE usuario SET nome          = $1,
-                                        cpf           = $2,
-                                        email         = $3,
-                                        senha         = $4,
-                                        tipo          = $5
-                      WHERE id = $6 RETURNING *`
-        const values = [usuario.nome, usuario.cpf, usuario.email, usuario.senha, usuario.tipo, id]
+                                        sobrenome     = $2,
+                                        cpf           = $3,
+                                        email         = $4,
+                                        senha         = $5,
+                                        tipo          = $6
+                      WHERE id = $7 RETURNING *`
+        const values = [usuario.nome, usuario.sobrenome, usuario.cpf, usuario.email, usuario.senha, usuario.tipo, id]
         const usuarios = await client.query(sql, values)
 
         client.release
