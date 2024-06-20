@@ -20,6 +20,7 @@ async function addHospedagem(id_usuario, hospedagem) {
             return hospedagens
         } catch (error) { throw error }
     } else {
+        console.log(hospedagem)
         const erro = new Error()
         erro.message = "Todos os campos são obrigatórios."
         erro.status = 400

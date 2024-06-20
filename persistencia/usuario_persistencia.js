@@ -92,13 +92,22 @@ async function deletarUsuario(id) {
     const client = await connect()
 
     try {
-        const sql = `DELETE FROM usuario WHERE id = $1 RETURNING *`
-        const values = [id]
-        const usuarios = await client.query(sql, values)
+        await client.query('BEGIN')
+        const sqlHospedagem = `DELETE FROM hospedagem WHERE id_usuario = $1 RETURNING *`
+        const valuesHospedagem = [id]
+        const hospedagemDel = await client.query(sqlHospedagem, valuesHospedagem)
 
-        client.release
-        return usuarios.rows[0]
-    } catch (error) { throw error }
+        const sqlUsuario = `DELETE FROM usuario WHERE id = $1 RETURNING *`
+        const valuesUsuario = [id]
+        const usuarioDel = await client.query(sqlUsuario, valuesUsuario)
+
+        await client.query('COMMIT')
+        return { usuario: usuarioDel.rows[0], hospedagem: hospedagemDel.rows[0] }
+    } catch (error) { 
+        await client.query('ROLLBACK')
+
+        throw error 
+    } finally { client.release }
 }
 
 module.exports = {
