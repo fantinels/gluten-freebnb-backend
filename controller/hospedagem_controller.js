@@ -75,12 +75,33 @@ async function buscarHospedagemId(req, res) {
 async function atualizarHospedagem(req, res) {
     const id = req.params.id
     const hospedagem = req.body
+    // if (req.files) {
+    //     hospedagem.foto = req.files.map(file => file.path); // Salve o nome do arquivo no campo 'foto'
+    // }
+
+    try {
+        const hospedagens = await negocio.atualizarHospedagem(id, hospedagem)
+        res.status(200).json(hospedagens)
+    } catch (error) {
+        if (error.status) {
+            res.status(error.status).json(error)
+        } else {
+            res.status(500).json({message: "Erro interno!"})
+            console.log(error)
+        }
+    }
+}
+
+// Atualizar fotos
+async function atualizarFotoHospedagem(req, res) {
+    const id = req.params.id
+    const hospedagem = req.body
     if (req.files) {
         hospedagem.foto = req.files.map(file => file.path); // Salve o nome do arquivo no campo 'foto'
     }
 
     try {
-        const hospedagens = await negocio.atualizarHospedagem(id, hospedagem)
+        const hospedagens = await negocio.atualizarFotoHospedagem(id, hospedagem)
         res.status(200).json(hospedagens)
     } catch (error) {
         if (error.status) {
@@ -115,5 +136,6 @@ module.exports = {
     buscarHospedagemUsuario,
     buscarHospedagemId,
     atualizarHospedagem,
+    atualizarFotoHospedagem,
     deletarHospedagem
 }

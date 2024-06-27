@@ -75,16 +75,31 @@ async function atualizarHospedagem(id, hospedagem) {
                                            nome          = $8,
                                            valor         = $9,
                                            descricao     = $10,
-                                           especificacao = $11,
-                                           foto          = $12
-                      WHERE id = $13 RETURNING *`;
+                                           especificacao = $11
+                      WHERE id = $12 RETURNING *`;
         const values = [hospedagem.endereco,      hospedagem.numero, hospedagem.complemento, hospedagem.bairro, hospedagem.cidade,
                         hospedagem.estado,        hospedagem.cep,    hospedagem.nome,        hospedagem.valor,  hospedagem.descricao,
-                        hospedagem.especificacao, hospedagem.foto,   id];
+                        hospedagem.especificacao, id];
         const hospedagens = await client.query(sql, values);
 
-        client.release();
+        client.release;
         return hospedagens.rows[0];
+    } catch (error) {
+        throw error;
+    }
+}
+
+// Atualizar fotos
+async function atualizarFotoHospedagem(id, hospedagem) {
+    const client = await connect()
+
+    try {
+        const sql = `UPDATE hospedagem SET foto = $1 WHERE id = $2 RETURNING *`
+        const value = [hospedagem.foto, id]
+
+        const fotoHospedagem = await client.query(sql, value)
+        client.release;
+        return fotoHospedagem.rows[0]
     } catch (error) {
         throw error;
     }
@@ -110,5 +125,6 @@ module.exports = {
     buscarHospedagemUsuario,
     buscarHospedagemId,
     atualizarHospedagem,
+    atualizarFotoHospedagem,
     deletarHospedagem
 }

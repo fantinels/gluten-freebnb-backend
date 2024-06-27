@@ -79,9 +79,28 @@ async function buscarHospedagemId(id) {
 async function atualizarHospedagem(id, hospedagem) {
     if (hospedagem && 
         hospedagem.endereco && hospedagem.numero && hospedagem.bairro     && hospedagem.cidade && hospedagem.estado        &&
-        hospedagem.nome     && hospedagem.valor  && hospedagem.descricao  && hospedagem.cep    && hospedagem.especificacao &&
-        hospedagem.foto) {
+        hospedagem.nome     && hospedagem.valor  && hospedagem.descricao  && hospedagem.cep    && hospedagem.especificacao) {
             const atualizarHospedagem = await persistencia.atualizarHospedagem(id, hospedagem);
+
+            if (!atualizarHospedagem) {
+                let erro = new Error();
+                erro.message = "Hospedagem não encontrada.";
+                erro.status = 404;
+                throw erro;
+            }
+            return atualizarHospedagem;
+        } else {
+            let erro = new Error();
+            erro.message = "Todos os campos são obrigatórios.";
+            erro.status = 400;
+            throw erro;
+        }
+}
+
+// Atualizar fotos
+async function atualizarFotoHospedagem(id, hospedagem) {
+    if (hospedagem && hospedagem.foto) {
+            const atualizarHospedagem = await persistencia.atualizarFotoHospedagem(id, hospedagem);
 
             if (!atualizarHospedagem) {
                 let erro = new Error();
@@ -121,5 +140,6 @@ module.exports = {
     buscarHospedagemUsuario,
     buscarHospedagemId,
     atualizarHospedagem,
+    atualizarFotoHospedagem,
     deletarHospedagem
 }
