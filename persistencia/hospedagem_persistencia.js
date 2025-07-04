@@ -2,7 +2,7 @@ const connect = require("../db");
 
 // Create
 async function addHospedagem(id_usuario, hospedagem) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `INSERT INTO hospedagem(id_usuario, endereco, numero, complemento, bairro, cidade, estado, cep, nome, valor, descricao,
@@ -14,26 +14,26 @@ async function addHospedagem(id_usuario, hospedagem) {
                         hospedagem.especificacao, hospedagem.foto]
         const hospedagens = await client.query(sql, values)
 
-        client.release
+        client.release()
         return hospedagens.rows[0]
     } catch (error) { throw error }
 }
 
 // Read
 async function buscarHospedagens() {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `SELECT * FROM hospedagem ORDER BY id`
         const hospedagens = await client.query(sql)
 
-        client.release
+        client.release()
         return hospedagens.rows
     } catch (error) { throw error }
 }
 
 async function buscarHospedagemUsuario(idUsuario) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `SELECT usuario.nome, hospedagem.* FROM hospedagem
@@ -42,27 +42,27 @@ async function buscarHospedagemUsuario(idUsuario) {
         const values = [idUsuario]
         const hospedagens = await client.query(sql, values)
 
-        client.release
+        client.release()
         return hospedagens.rows
     } catch (error) { throw error }
 }
 
 async function buscarHospedagemId(id) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `SELECT * FROM hospedagem WHERE id = $1`
         const values = [id]
         const hospedagens = await client.query(sql, values)
 
-        client.release
+        client.release()
         return hospedagens.rows[0]
     } catch (error) { throw error }
 }
 
 // Update
 async function atualizarHospedagem(id, hospedagem) {
-    const client = await connect();
+    const client = await pool.connect();
 
     try {
         const sql = `UPDATE hospedagem SET endereco      = $1,
@@ -82,7 +82,7 @@ async function atualizarHospedagem(id, hospedagem) {
                         hospedagem.especificacao, id];
         const hospedagens = await client.query(sql, values);
 
-        client.release;
+        client.release();
         return hospedagens.rows[0];
     } catch (error) {
         throw error;
@@ -91,14 +91,14 @@ async function atualizarHospedagem(id, hospedagem) {
 
 // Atualizar fotos
 async function atualizarFotoHospedagem(id, hospedagem) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `UPDATE hospedagem SET foto = $1 WHERE id = $2 RETURNING *`
         const value = [hospedagem.foto, id]
 
         const fotoHospedagem = await client.query(sql, value)
-        client.release;
+        client.release();
         return fotoHospedagem.rows[0]
     } catch (error) {
         throw error;
@@ -107,14 +107,14 @@ async function atualizarFotoHospedagem(id, hospedagem) {
 
 // Delete
 async function deletarHospedagem(id) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `DELETE FROM hospedagem WHERE id = $1 RETURNING *`
         const values = [id]
         const hospedagens = await client.query(sql, values)
 
-        client.release
+        client.release()
         return hospedagens.rows[0]
     } catch (error) { throw error }
 }

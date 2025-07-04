@@ -2,7 +2,7 @@ const connect = require("../db");
 
 // Create
 async function addUsuario(usuario) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `INSERT INTO usuario(nome, sobrenome, cpf, email, senha, tipo) 
@@ -10,14 +10,14 @@ async function addUsuario(usuario) {
         const values = [usuario.nome, usuario.sobrenome, usuario.cpf, usuario.email, usuario.senha, usuario.tipo]
         const usuarios = await client.query(sql, values)
 
-        client.release
+        client.release()
         return usuarios.rows[0]
     } catch (error) { throw error }
 }
 
 // Read
 async function buscarUsuario() {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `SELECT * FROM usuario`
@@ -29,47 +29,47 @@ async function buscarUsuario() {
 }
 
 async function buscarUsuarioNome(nome) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `SELECT * FROM usuario WHERE nome = $1`
         const values = [nome]
         const usuarios = await client.query(sql, values)
 
-        client.release
+        client.release()
         return usuarios.rows[0]
     } catch (error) { throw error }
 }
 
 async function buscarUsuarioId(id) {
-    const client = await connect()
+    const client = await pool.connect()
     
     try {
         const sql = `SELECT * FROM usuario WHERE id = $1`
         const values = [id]
         const usuarios = await client.query(sql, values)
 
-        client.release
+        client.release()
         return usuarios.rows[0]
     } catch (error) { throw error }
 }
 
 async function buscarUsuarioEmail(email) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `SELECT * FROM usuario WHERE email = $1`
         const values = [email]
         const usuarios = await client.query(sql, values)
 
-        client.release
+        client.release()
         return usuarios.rows[0]
     } catch (error) { throw error }
 }
 
 // Update
 async function atualizarUsuario(id, usuario) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         const sql = `UPDATE usuario SET nome          = $1,
@@ -82,14 +82,14 @@ async function atualizarUsuario(id, usuario) {
         const values = [usuario.nome, usuario.sobrenome, usuario.cpf, usuario.email, usuario.senha, usuario.tipo, id]
         const usuarios = await client.query(sql, values)
 
-        client.release
+        client.release()
         return usuarios.rows[0]
     } catch (error) { throw error }
 }
 
 // Delete
 async function deletarUsuario(id) {
-    const client = await connect()
+    const client = await pool.connect()
 
     try {
         await client.query('BEGIN')
@@ -107,7 +107,7 @@ async function deletarUsuario(id) {
         await client.query('ROLLBACK')
 
         throw error 
-    } finally { client.release }
+    } finally { client.release() }
 }
 
 module.exports = {

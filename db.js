@@ -1,21 +1,33 @@
 require('dotenv').config();
+const { Pool } = require('pg');
 
-const { Pool } = require("pg");
+const pool = new Pool({
+  connectionString: process.env.CONNECTION_STRING,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
-async function connect() {
+module.exports = pool;
 
-  const pool = new Pool({
-    connectionString: process.env.CONNECTION_STRING,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  });
+// require('dotenv').config();
 
-  const client = await pool.connect();
+// const { Pool } = require("pg");
 
-  client.release();
+// async function connect() {
 
-  return pool.connect();
-}
+//   const pool = new Pool({
+//     connectionString: process.env.CONNECTION_STRING,
+//     ssl: {
+//       rejectUnauthorized: false,
+//     },
+//   });
 
-module.exports = connect
+//   const client = await pool.connect();
+
+//   client.release();
+
+//   return pool.connect();
+// }
+
+// module.exports = connect
