@@ -1,26 +1,18 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
-async function connect() {
-  const pool = new Pool({
-    connectionString: process.env.CONNECTION_STRING,
-    ssl: {
-      rejectUnauthorized: false
-    },
-    max: 1,
-    idleTimeoutMillis: 10000,
-    connectionTimeoutMillis: 5000,
-    keepAlive: true,
-  });
+const pool = new Pool({
+  connectionString: process.env.CONNECTION_STRING,
+  ssl: {
+    rejectUnauthorized: false
+  },
+  max: 1,
+  idleTimeoutMillis: 10000,
+  connectionTimeoutMillis: 5000,
+  keepAlive: true,
+});
 
-  const client = await pool.connect();
-  client.release();
-  return pool.connect();
-  }
-
-module.exports = connect
-
-// module.exports = pool;
+ module.exports = pool;
 
 // require('dotenv').config();
 
