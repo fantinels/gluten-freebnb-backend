@@ -1,4 +1,4 @@
-const connect = require("../db");
+const pool = require("../db");
 
 // Create
 async function addHospedagem(id_usuario, hospedagem) {
