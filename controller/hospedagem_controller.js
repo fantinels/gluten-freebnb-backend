@@ -17,7 +17,9 @@ async function addHospedagem(req, res) {
         if (error.status) {
             res.status(error.status).json(error);
         } else {
-            res.status(500).json({ message: "Erro interno!" });
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({ message: "Erro interno!" });
         }
     }
 }
@@ -33,7 +35,9 @@ async function buscarHospedagens(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -49,7 +53,9 @@ async function buscarHospedagemUsuario(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -65,7 +71,9 @@ async function buscarHospedagemId(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -86,7 +94,9 @@ async function atualizarHospedagem(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -107,7 +117,9 @@ async function atualizarFotoHospedagem(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -124,7 +136,9 @@ async function deletarHospedagem(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }

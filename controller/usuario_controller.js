@@ -14,7 +14,9 @@ async function addUsuario(req, res) {
             res.status(error.status).json(error)
             console.log(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -31,7 +33,9 @@ async function buscarUsuario(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -47,7 +51,9 @@ async function buscarUsuarioNome(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -63,7 +69,9 @@ async function buscarUsuarioId(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -78,7 +86,9 @@ async function buscarUsuarioEmail(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -96,7 +106,9 @@ async function atualizarUsuario(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
@@ -113,7 +125,9 @@ async function deletarUsuario(req, res) {
         if (error.status) {
             res.status(error.status).json(error)
         } else {
-            res.status(500).json({message: "Erro interno!"})
+            console.error("ERRO DETALHADO:", error);
+            res.status(500).json({ message: "Erro interno!", erro: String(error), stack: error.stack });
+            // res.status(500).json({message: "Erro interno!"})
             console.log(error)
         }
     }
