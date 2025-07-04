@@ -10,9 +10,8 @@ async function addUsuario(usuario) {
         const values = [usuario.nome, usuario.sobrenome, usuario.cpf, usuario.email, usuario.senha, usuario.tipo]
         const usuarios = await client.query(sql, values)
 
-        client.release()
         return usuarios.rows[0]
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 // Read
@@ -22,10 +21,10 @@ async function buscarUsuario() {
     try {
         const sql = `SELECT * FROM usuario`
         const usuarios = await client.query(sql)
-        await client.end()
+        // await client.end()
         // await client.release
         return usuarios.rows
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 async function buscarUsuarioNome(nome) {
@@ -36,9 +35,8 @@ async function buscarUsuarioNome(nome) {
         const values = [nome]
         const usuarios = await client.query(sql, values)
 
-        client.release()
         return usuarios.rows[0]
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 async function buscarUsuarioId(id) {
@@ -49,9 +47,8 @@ async function buscarUsuarioId(id) {
         const values = [id]
         const usuarios = await client.query(sql, values)
 
-        client.release()
         return usuarios.rows[0]
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 async function buscarUsuarioEmail(email) {
@@ -62,9 +59,8 @@ async function buscarUsuarioEmail(email) {
         const values = [email]
         const usuarios = await client.query(sql, values)
 
-        client.release()
         return usuarios.rows[0]
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 // Update
@@ -82,9 +78,8 @@ async function atualizarUsuario(id, usuario) {
         const values = [usuario.nome, usuario.sobrenome, usuario.cpf, usuario.email, usuario.senha, usuario.tipo, id]
         const usuarios = await client.query(sql, values)
 
-        client.release()
         return usuarios.rows[0]
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 // Delete

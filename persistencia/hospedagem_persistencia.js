@@ -14,9 +14,8 @@ async function addHospedagem(id_usuario, hospedagem) {
                         hospedagem.especificacao, hospedagem.foto]
         const hospedagens = await client.query(sql, values)
 
-        client.release()
         return hospedagens.rows[0]
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 // Read
@@ -27,9 +26,8 @@ async function buscarHospedagens() {
         const sql = `SELECT * FROM hospedagem ORDER BY id`
         const hospedagens = await client.query(sql)
 
-        client.release()
         return hospedagens.rows
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 async function buscarHospedagemUsuario(idUsuario) {
@@ -42,9 +40,8 @@ async function buscarHospedagemUsuario(idUsuario) {
         const values = [idUsuario]
         const hospedagens = await client.query(sql, values)
 
-        client.release()
         return hospedagens.rows
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 async function buscarHospedagemId(id) {
@@ -55,9 +52,8 @@ async function buscarHospedagemId(id) {
         const values = [id]
         const hospedagens = await client.query(sql, values)
 
-        client.release()
         return hospedagens.rows[0]
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 // Update
@@ -82,11 +78,10 @@ async function atualizarHospedagem(id, hospedagem) {
                         hospedagem.especificacao, id];
         const hospedagens = await client.query(sql, values);
 
-        client.release();
         return hospedagens.rows[0];
     } catch (error) {
         throw error;
-    }
+    } finally { client.release() }
 }
 
 // Atualizar fotos
@@ -98,11 +93,10 @@ async function atualizarFotoHospedagem(id, hospedagem) {
         const value = [hospedagem.foto, id]
 
         const fotoHospedagem = await client.query(sql, value)
-        client.release();
         return fotoHospedagem.rows[0]
     } catch (error) {
         throw error;
-    }
+    } finally { client.release() }
 }
 
 // Delete
@@ -114,9 +108,8 @@ async function deletarHospedagem(id) {
         const values = [id]
         const hospedagens = await client.query(sql, values)
 
-        client.release()
         return hospedagens.rows[0]
-    } catch (error) { throw error }
+    } catch (error) { throw error } finally { client.release() }
 }
 
 module.exports = {
