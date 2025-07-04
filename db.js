@@ -5,7 +5,10 @@ const pool = new Pool({
   connectionString: process.env.CONNECTION_STRING,
   ssl: {
     rejectUnauthorized: false
-  }
+  },
+  idleTimeoutMillis: 10000,
+  connectionTimeoutMillis: 5000,
+  keepAlive: true,
 });
 
 module.exports = pool;
